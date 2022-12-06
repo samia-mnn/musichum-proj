@@ -43,7 +43,7 @@ function draw() {
   pasty=0;
   for (let x = 0; x < volHistory.length; x++) {
     stroke(255, 255, 255-x%255)
-    strokeWeight(10);
+    strokeWeight(5);
     let y = map(volHistory[x], 0, 1, height, 0);
     if (x%600 == 0)
     {
