@@ -22,7 +22,7 @@ false, function(response){
   song2 = response['tracks'][5]['previewURL'];
   console.log(song2);
  // fixed = 'Access-Control-Allow-Origin: https'+song2.substring(4);
-  song = loadSound(song1);
+  song = song1;
 });
 }
 //option to pick a new song and save the volhistory
