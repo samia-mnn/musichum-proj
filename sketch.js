@@ -21,7 +21,8 @@ false, function(response){
   console.log(response);
   song2 = response['tracks'][5]['previewURL'];
   console.log(song2);
-  song = loadSound(song2);//'https://cdn.pixabay.com/download/audio/2022/01/09/audio_f248363532.mp3?filename=fur-elise-by-ludwig-van-beethoven-classic-guitar-ahmad-mousavipour-13870.mp3');
+  fixed = 'https'+song.substring(4);
+  song = loadSound(fixed);//'https://cdn.pixabay.com/download/audio/2022/01/09/audio_f248363532.mp3?filename=fur-elise-by-ludwig-van-beethoven-classic-guitar-ahmad-mousavipour-13870.mp3');
 });
 }
 //option to pick a new song and save the volhistory
@@ -42,6 +43,7 @@ function draw() {
   pasty=0;
   for (let x = 0; x < volHistory.length; x++) {
     stroke(255, 255, 255-x%255)
+    strokeWeight(10);
     let y = map(volHistory[x], 0, 1, height, 0);
     if (x%600 == 0)
     {
