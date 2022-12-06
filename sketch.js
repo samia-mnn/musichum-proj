@@ -9,9 +9,9 @@ let beethovenSongs =
 ]
 
 
-
-
 function preload() {
+  
+
   song1 = loadSound('audio/something.mp3'); 
   song = song1;
   song2 = song;
@@ -21,7 +21,7 @@ false, function(response){
   console.log(response);
   song2 = response['tracks'][5]['previewURL'];
   console.log(song2);
-  song = loadSound('https://cdn.pixabay.com/download/audio/2022/01/09/audio_f248363532.mp3?filename=fur-elise-by-ludwig-van-beethoven-classic-guitar-ahmad-mousavipour-13870.mp3');
+  song = loadSound(song2);//'https://cdn.pixabay.com/download/audio/2022/01/09/audio_f248363532.mp3?filename=fur-elise-by-ludwig-van-beethoven-classic-guitar-ahmad-mousavipour-13870.mp3');
 });
 }
 //option to pick a new song and save the volhistory
@@ -76,4 +76,41 @@ function breakSections(volHist){
     sections.append(timestamps[i*600]);
   }
   return sections;
+}
+
+function prepareSpotify() {
+
+var client_id = 'c253aa5496b8489ba7b7a1fd0062522a'; // Your client id
+var client_secret = '4e8097ad91964139b9a3bf7b7c5382b3'; // Your secret
+
+// your application requests authorization
+var authOptions = {
+  url: 'https://accounts.spotify.com/api/token',
+  headers: {
+    'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+  },
+  form: {
+    grant_type: 'client_credentials'
+  },
+  json: true
+};
+
+httpPost(authOptions, function(error, response, body) {
+  if (!error && response.statusCode === 200) {
+
+    // use the access token to access the Spotify Web API
+    var token = body.access_token;
+    var options = {
+      url: 'https://api.spotify.com/v1/browse/categories',
+      headers: {
+        'Authorization': 'Bearer ' + token
+      },
+      json: true
+    };
+    request.get(options, function(error, response, body) {
+      console.log(body);
+    });
+  }
+});
+return token;
 }
