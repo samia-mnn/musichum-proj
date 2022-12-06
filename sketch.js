@@ -12,7 +12,7 @@ let beethovenSongs =
 function preload() {
   
 
-  song1 = loadSound('audio/something.mp3'); 
+  song1 = loadSound('audio/moonlightsonata.mp3'); 
   song = song1;
   song2 = song;
   getAudioContext().resume();
@@ -21,8 +21,8 @@ false, function(response){
   console.log(response);
   song2 = response['tracks'][5]['previewURL'];
   console.log(song2);
-  fixed = 'Access-Control-Allow-Origin: https'+song2.substring(4);
-  song = loadSound(fixed);//'https://cdn.pixabay.com/download/audio/2022/01/09/audio_f248363532.mp3?filename=fur-elise-by-ludwig-van-beethoven-classic-guitar-ahmad-mousavipour-13870.mp3');
+ // fixed = 'Access-Control-Allow-Origin: https'+song2.substring(4);
+  song = loadSound(song1);
 });
 }
 //option to pick a new song and save the volhistory
