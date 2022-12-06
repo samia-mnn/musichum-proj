@@ -45,14 +45,15 @@ function draw() {
   pasty=0;
   for (let x = 0; x < volHistory.length; x++) {
     stroke(255-x*255/volHistory.length, 255-x*255/volHistory.length, 255)
-    let y = map(volHistory[x], 0, 1, height, 0);
+    let y = map(volHistory[x], 0, 1, height, -height/2);
+    y = y;
     if (x%600 == 0)
     {
-       text(int(timeStamps[x]), x/scale-100, 50);
+       text(int(timeStamps[x]), x/scale-width/10, height/10);
     }
-    line(pastx/scale-100, pasty-100, x/scale-100, 2*y-900);
+    line(pastx/scale-width/10, pasty-height/10, x/scale-width/10, y-height/10);
     pastx = x;
-    pasty = 2*y-800;
+    pasty = y;
    
   }
   stroke(255,255,255);
