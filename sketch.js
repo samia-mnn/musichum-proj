@@ -50,7 +50,7 @@ function draw() {
     {
        text(int(timeStamps[x]), x/scale-100, 50);
     }
-    line(pastx/scale-100, pasty, x/scale-100, 2*y-800);
+    line(pastx/scale-100, pasty-100, x/scale-100, 2*y-900);
     pastx = x;
     pasty = 2*y-800;
    
