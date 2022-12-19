@@ -10,11 +10,21 @@ let beethovenSongs =
 ];
 
 
+//put in timeline events here
+let timeTexts =
+[
+
+
+]
+
+
+
+
 function preload() {
 
   song = loadSound('audio/moonlightsonata.mp3'); 
   nextsong = loadSound('audio/something.mp3');
-  img = loadImage('bg.png');
+  img = loadImage('purpleimg.jpg');
   stars = generateRandom();
   getAudioContext().resume();
  // fixed = 'Access-Control-Allow-Origin: https'+song2.substring(4);
@@ -28,11 +38,15 @@ function setup() {
   amp = new p5.Amplitude();
   time = 0;
   frameRate(30);
+  //make an array of timestamps, with their information
+  //update their location every time
+  //do a command that has the if statements 
+  //how do we kee
 }
 
 function draw() {
   background(0);
- // image(img, 0, 0, width, height);
+  image(img, 0, 0, width, height);
   let vol = amp.getLevel();
   time = time+1;
 
@@ -43,13 +57,35 @@ function draw() {
   scale = volHistory.length/width; 
   pastx = 0;
   pasty=0;
+  locations = [];
   for (let x = 0; x < volHistory.length; x++) {
     stroke(255-x*255/volHistory.length, 255-x*255/volHistory.length, 255)
     let y = map(volHistory[x], 0, 1, height, -height/2);
     y = y;
     if (x%600 == 0)
     {
-       text(int(timeStamps[x]), x/scale-width/10, height/10);
+       text(1801+20*int((timeStamps[x])/20), x/scale-width/10, height/10);
+       //stars.pop();
+     
+      // ele.mouseOver(boxInfo(x/scale-width/10, height/10));
+      if(x==600)
+      {
+        locations.push(x/scale-width/10);
+      }
+     //  if(x/600==4)
+     //     text("The Leviathan of Parsontown is Completed",  x/scale-width/10, 2*height/10 );
+    }
+    for (let i=0; i<locations.length; i++)
+    {
+      if (mouseX>locations[i]&& mouseX<locations[i]+width/10 && mouseY < 2*height/10)
+      {
+      fill(159,150,200,210);
+      noStroke();
+      rect(locations[i]-1.1*width/10, 2*height/10, 2.4*width/10, height/15, 20);
+      fill(0,0,0);
+      text("Beethoven first writes Moonlight Sonata",  locations[i]-width/10, 2*height/10);
+      }
+
     }
     line(pastx/scale-width/10, pasty-height/10, x/scale-width/10, y-height/10);
     pastx = x;
@@ -63,33 +99,26 @@ function draw() {
   fill(200, 200,255);
   noStroke();
   textSize(20);
-  text("Beethoven wrote his Moonlight Sonata in 1801. At that point, in most of the world, anyone could look up and see a sky full of stars. \nBy the time this sonata ends, it will be 2022.", 20, 2*height/3+50);
+  text("Beethoven wrote his Moonlight Sonata in 1801. At that point, in most of the world, anyone could look up and see a sky full of stars. \nBy the time this excerpt ends, it will be 2022.", 20, 2*height/3+50);
 
   }
   drawStars(stars);
-  if (time >=10000)
+  addValue = 0;
+  if (volHistory.length >= 3000)
+  {
+    addValue = 3;
+  }
+  for (let y = 0; y < int(volHistory.length/600)+addValue; y++)
+  {
+    if(volHistory.length % (90-20*(addValue-1)) == 0)
+    {
+      stars.pop();
+    }
+
+  }
+  if (time >=6600)
   {
     song.stop();
-    frameRate(30);
-    nextsong.play();
-    volHistory2.push(vol);
-    pastx2 = 0;
-    pasty2 = 0;
-    scale2 = volHistory2.length/width; 
-
-    for (let j = 0; j < volHistory2.length; j++) {
-      stroke(255-j%255, 255, 255)
-      strokeWeight(5);
-      let k = map(volHistory2[j], 0, 1, height, 0);
-    /*  if (x%600 == 0)
-      {
-         text(int(timeStamps[x]), x/scale-100, 50);
-      }*/
-      line(pastx2/scale2-100, pasty2, j/scale2-100, k);
-      pastx2 = j;
-      pasty2 = k;
-     
-    }
   }
   
   
@@ -100,6 +129,10 @@ function draw() {
 // Click on the web page to start audio
 function touchStarted() {
   getAudioContext().resume();
+}
+
+function boxInfo(locX, locY){
+  text("Beethoven first writes Moonlight Sonata",  locX, locY);
 }
 
 function calculateSimilarSections(volHistory1, volHistory2) {
@@ -122,25 +155,27 @@ function breakSections(volHist){
 function generateRandom()
 {
    coordinateTuples = [];
-  for(i = 0 ; i < 100; i++)
+  for(i = 0 ; i < 500; i++)
   {
-      coordinateTuples.push([int(random(windowWidth)), int(random(windowHeight))-300]);
+      coordinateTuples.push([int(random(windowWidth)), int(random(windowHeight))-300, (random(1,4))]);
   }
   return coordinateTuples;
 }
 
 function drawStars(fun)
 {
-  fill(255,255,255);
+
   for (i = 0; i < fun.length; i++)
   {
-
-
+    fill(255,255,255);
+    if (i%5 == 0)
+      fill(150,150,200);
 
     push();
     translate(fun[i][0], fun[i][1]);
     rotate(frameCount / -100.0);
-    star(0, 0, 6, 3, 5);
+    sizeVal = fun[i][2];
+    star(0, 0, 2*sizeVal, sizeVal, 5);
     pop();
   }
 }
