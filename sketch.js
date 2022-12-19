@@ -64,7 +64,8 @@ function draw() {
     y = y;
     if (x%600 == 0)
     {
-       text(1801+20*int((timeStamps[x])/20), x/scale-width/10, height/10);
+      if(time < 4800)
+       {text(1801+20*int((timeStamps[x])/20), x/scale-width/10, height/10);}
        //stars.pop();
      
       // ele.mouseOver(boxInfo(x/scale-width/10, height/10));
@@ -104,19 +105,23 @@ function draw() {
   }
   drawStars(stars);
   addValue = 0;
-  if (volHistory.length >= 3000)
+  if (volHistory.length >= 2500)
   {
     addValue = 3;
   }
+  if (volHistory.length >=3400)
+  {
+    addValue = 4;
+  }
   for (let y = 0; y < int(volHistory.length/600)+addValue; y++)
   {
-    if(volHistory.length % (90-20*(addValue-1)) == 0)
+    if((time < 4800) && volHistory.length % (90-20*(addValue-1)) == 0)
     {
       stars.pop();
     }
 
   }
-  if (time >=6600)
+  if (time >=4800)
   {
     song.stop();
   }
@@ -155,7 +160,7 @@ function breakSections(volHist){
 function generateRandom()
 {
    coordinateTuples = [];
-  for(i = 0 ; i < 500; i++)
+  for(i = 0 ; i < 570; i++)
   {
       coordinateTuples.push([int(random(windowWidth)), int(random(windowHeight))-300, (random(1,4))]);
   }
