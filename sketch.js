@@ -178,7 +178,7 @@ function getText(place) {
     if (place == 1900)
      {return ("The late 1800s saw many revolutions in the field of astrophysics. During this time, the Yerkes Observatory \nwas founded, one of the most impressive refracting telescopes ever  created.");}
     if (place == 1925)
-      {return ("In __, Thomas Edison began promoting the lightbulb. This event marks the beginning of major light pollution.");}
+      {return ("In the 1880s, Thomas Edison began promoting the lightbulb. By the 20th century, they were widespread. \nThis event marks the beginning of major light pollution.");}
     if (place == 1950)
     {
       return ("In the 1930s, fluorescent and incandescent street lamps become widely popular - along with automobile travel. \nIncreased city populations as well as growing suburbs rapidly contribute to skyglow.")
@@ -186,6 +186,15 @@ function getText(place) {
     if (place == 1975)
     {
       return "Scientific American publishes a story showing investgating how green turtle hatchlings use moonlight to safely navigate to the sea, \na journey made far more perilous due to light pollution.";
+    }
+    if (place == 2000)
+    {
+      return "Between 2000 and 2021, night sky visibility is estimated to have decreased by around 28%."
+    }
+
+    if (place == 2025)
+    {
+      return "Ecological Consequences of Artificial Night Lighting Conference finds that light pollution has had signficant negative health impacts on wildlife \n and humans, particularly disrupting natural circadian rhythms."
     }
 }
 function calculateSimilarSections(volHistory1, volHistory2) {
