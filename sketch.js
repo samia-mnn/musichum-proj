@@ -138,7 +138,7 @@ function draw() {
   {
     drawStars(stars2, false);
     fade = fade+1;
-    if (time >=5500)
+    if (time >=6000)
     {
       song.stop();
     }
