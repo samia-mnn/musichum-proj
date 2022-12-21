@@ -56,6 +56,8 @@ function draw() {
   image(img, 0, 0, width, height);
   let vol = amp.getLevel();
   time = time+1;
+  let clearness = 255;
+
 
   if (time < 10000)
   {
@@ -67,7 +69,6 @@ function draw() {
   mainDex = 0;
   latestValue = timeVals[mainDex];
   frameRate = 30;
-  let clearness = 255;
   locations = [];
   for (let x = 0; x < volHistory.length; x++) {
     stroke(255-x*255/volHistory.length, 255-x*255/volHistory.length, 255)
@@ -99,25 +100,13 @@ function draw() {
     pastx = x;
     pasty = y;
 
-    for (let i=0; i<locations.length; i++)
-    {
-      if (mouseX>locations[i]&& mouseX<locations[i]+width/10 && mouseY < 2*height/10)
-      {
-      fill(159,150,200,210);
-      noStroke();
-      rect(locations[i]-1.1*width/10, 2*height/10, 2.4*width/10, height/15, 20);
-      fill(0,0,0);
-      text("Beethoven first writes Moonlight Sonata",  locations[i]-width/10, 2*height/10);
-      }
-
-    }
    
   }
   stroke(255,255,255);
   fill(255,255,255);
   textSize(40);
   text("The End of Moonlight", 20, 2*height/3);
-  fill(200, 200,255);
+  fill(200, 200,255, clearness);
   noStroke();
   textSize(20);
   text(getText(latestValue), 20, 2*height/3+50);
@@ -149,6 +138,10 @@ function draw() {
   {
     drawStars(stars2, false);
     fade = fade+1;
+    if (time >=5500)
+    {
+      song.stop();
+    }
    // song.stop();
     //and then we draw all the stars we lost but in red
   }
@@ -174,18 +167,18 @@ function getText(place) {
       return("Beethoven wrote his Moonlight Sonata in 1801. At that point, in most of the world, anyone could look up and see a sky full of stars. \nBy the time this excerpt ends, it will be 2022.");
     }
     if (place == 1875)
-      {return ("At this point, light pollution did not affect night sky visibility. Air pollution, however, due to industrialization, began to hold an impact.");}
+      {return ("At this point, light pollution does not affect night sky visibility. Air pollution, however, due to industrialization, begins to have an impact.");}
     if (place == 1900)
-     {return ("The late 1800s saw many revolutions in the field of astrophysics. During this time, the Yerkes Observatory \nwas founded, one of the most impressive refracting telescopes ever  created.");}
+     {return ("The late 1800s saw many revolutions in the field of astrophysics. During this time, the Yerkes Observatory \nis founded, one of the most impressive refracting telescopes ever  created.");}
     if (place == 1925)
-      {return ("In the 1880s, Thomas Edison began promoting the lightbulb. By the 20th century, they were widespread. \nThis event marks the beginning of major light pollution.");}
+      {return ("In the 1880s, Thomas Edison begins promoting the lightbulb. By the 20th century, they are widespread. \nThis event marks the beginning of major light pollution.");}
     if (place == 1950)
     {
-      return ("In the 1930s, fluorescent and incandescent street lamps become widely popular - along with automobile travel. \nIncreased city populations as well as growing suburbs rapidly contribute to skyglow.")
+      return ("In the 1930s, fluorescent and incandescent street lamps are becoming widely popular - along with automobile travel. \nIncreased city populations as well as growing suburbs rapidly contribute to skyglow.")
     }
     if (place == 1975)
     {
-      return "Scientific American publishes a story showing investgating how green turtle hatchlings use moonlight to safely navigate to the sea, \na journey made far more perilous due to light pollution.";
+      return "Scientific American publishes a story investigating how green turtle hatchlings use moonlight to safely navigate to the sea, \na journey made far more perilous due to light pollution.";
     }
     if (place == 2000)
     {
@@ -194,8 +187,10 @@ function getText(place) {
 
     if (place == 2025)
     {
-      return "Ecological Consequences of Artificial Night Lighting Conference finds that light pollution has had signficant negative health impacts on wildlife \n and humans, particularly disrupting natural circadian rhythms."
+      return "The Ecological Consequences of Artificial Night Lighting Conference finds that light pollution has had signficant negative health impacts on wildlife \n and humans, particularly disrupting natural circadian rhythms."
     }
+
+    return "Now, roughly 83% of Earth's human population live under light polluted skies, including 99% of Americans."
 }
 function calculateSimilarSections(volHistory1, volHistory2) {
    ///break the songs into sections 
