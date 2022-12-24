@@ -104,12 +104,12 @@ function draw() {
   }
   stroke(255,255,255);
   fill(255,255,255);
-  textSize(40);
-  text("The End of Moonlight", 20, 2*height/3);
+  textSize(windowWidth/40);
+  text("The End of Moonlight", 1.5*windowWidth/40, 2*height/3);
   fill(200, 200,255, clearness);
   noStroke();
-  textSize(20);
-  text(getText(latestValue), 20, 2*height/3+50);
+  textSize(windowWidth/80);
+  text(getText(latestValue), 1.5*windowWidth/40, 2.2*height/3);
 
   }
   drawStars(stars, true);
